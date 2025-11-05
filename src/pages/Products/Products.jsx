@@ -1,16 +1,10 @@
-import React, { useEffect, useState } from 'react'
 
 import { ProductCart } from '../../components/ProductCart/ProductCart';
 import { Box } from '@mui/material';
 
 
-export const Products = () => {
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then((res) => res.json())
-      .then((res) => setProducts(res))
-  }, []);
+export const Products = ({products}) => {
+
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", gap: "50px", alignItems: "stretch", padding: "40px", }}>
       {

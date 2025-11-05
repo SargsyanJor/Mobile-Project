@@ -1,8 +1,10 @@
 import * as React from 'react';
-import { AppBar, Box, Toolbar, Typography, Container, Button } from '@mui/material';
+import { AppBar, Tooltip, Box, Toolbar, Typography, Container, Button, IconButton } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { NavLink } from 'react-router-dom';
 
-const pages = [{ title: "Home", path: '/' }, { title: "Products", path: '/products' }];
+const pages = [{ title: "Home", path: '/' },
+{ title: "Products", path: '/products' }];
 
 export const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -42,7 +44,7 @@ export const Header = () => {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            APP SHOP
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: 'flex', gap: '20px' }}>
@@ -61,9 +63,30 @@ export const Header = () => {
           </Box>
 
 
+          <Box
+            component={NavLink}
+            to="/cart"
+          >
+            <IconButton >
+              <ShoppingCartIcon />
+            </IconButton>
+          </Box>
+
 
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
+
+
+// const [loading, setLoading] = React.useState(false);
+//     React.useEffect(() => {
+//         const timeout = setTimeout(() => {
+//             setLoading(false);
+//         }, 2000);
+//         return () => clearTimeout(timeout);
+//     });
+//     return (
+
+//     );
