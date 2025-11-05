@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import axios from 'axios'
+import { instance } from '../../App/App'
 
 export const Product = () => {
 
@@ -7,9 +9,8 @@ export const Product = () => {
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
-        fetch(`https://fakestoreapi.com/products/${id}`)
-            .then((res) => res.json())
-            .then((res) => setProduct(res))
+        instance.get(`/products/${id}`)
+            .then((res) => setProduct(res.data))
     }, [id]);
 
 
