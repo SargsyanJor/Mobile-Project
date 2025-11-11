@@ -12,18 +12,54 @@ import axios from "axios";
 import "./styles/App.css"
 
 
-  export const instance = axios.create({
-    baseURL: "https://fakestoreapi.com"
-  })
+export const instance = axios.create({
+  baseURL: "https://fakestoreapi.com"
+})
 
 function App() {
 
 
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+
+
   useEffect(() => {
     instance.get("/products")
-      .then((res) => setProducts(res.data))
+      .then((res) => setProducts(res.data.map((elm) => ({ ...elm, count: 1, initPrice: elm.price }))))
   }, []);
+
+  console.log(cart)
+
+
+  const addToCard = (item) => {
+
+    let bool = true
+
+    cart.forEach((el) => {
+      if (el.id === item.id) {
+        bool = false
+        setCart(cart.map((e) => {
+          if (e.id === item.id) {
+            return {
+              ...e,
+              count: ++e.count,
+              initPrice: e.count * e.price
+            }
+          } else {
+            return e
+          }
+        }))
+      }
+    })
+
+
+    if (bool) {
+      setCart((prev) => [...prev, item])
+    }
+
+
+
+  }
 
   return (
     <>
@@ -32,9 +68,9 @@ function App() {
       <Routes >
         <Route path="/" element={<Layout />} >
           <Route index element={<Home />} />
-          <Route path="/products" element={<Products products={products} />} />
+          <Route path="/products" element={<Products products={products} addToCard={addToCard} />} />
           <Route path="/products/:id" element={<Product />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<Cart cart={cart} />} />
         </Route>
 
       </Routes>

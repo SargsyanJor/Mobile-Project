@@ -3,7 +3,7 @@ import { Card, CardContent, CardMedia, Typography, CardActionArea, Button, Box }
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { NavLink } from 'react-router-dom';
 
-export const ProductCart = ({ products }) => {
+export const ProductCart = ({ products,addToCard }) => {
 
     return (
         <Card
@@ -42,7 +42,7 @@ export const ProductCart = ({ products }) => {
                     </CardContent>
                 </CardActionArea>
             </Box>
-            <Button
+            <Button onClick={() => addToCard(products)}
                 sx={{
                     width: "100%",
                     padding: "10px",
