@@ -28,7 +28,8 @@ function App() {
       .then((res) => setProducts(res.data.map((elm) => ({ ...elm, count: 1, initPrice: elm.price }))))
   }, []);
 
-  console.log(cart)
+ const cartLenght = cart.length
+
 
 
   const addToCard = (item) => {
@@ -61,16 +62,30 @@ function App() {
 
   }
 
+  const updateCart = (count,id) => {
+    setCart((cart.map((c)=> {
+      if(c.id === id) {
+        return {
+          ...c,
+         count:count,
+         initPrice : count * c.price
+        } 
+        }else {
+          return c
+      }
+    })))
+  }
+
   return (
     <>
       {/* <RouterProvider router={router} /> */}
 
       <Routes >
-        <Route path="/" element={<Layout />} >
+        <Route path="/" element={<Layout cartLenght={cartLenght} />} >
           <Route index element={<Home />} />
-          <Route path="/products" element={<Products products={products} addToCard={addToCard} />} />
+          <Route path="/products" element={<Products products={products} addToCard={addToCard}  />} />
           <Route path="/products/:id" element={<Product />} />
-          <Route path="/cart" element={<Cart cart={cart} />} />
+          <Route path="/cart" element={<Cart cart={cart} updateCart={updateCart} />} />
         </Route>
 
       </Routes>

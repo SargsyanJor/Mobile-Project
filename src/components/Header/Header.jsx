@@ -1,14 +1,28 @@
 import * as React from 'react';
 import { AppBar, Tooltip, Box, Toolbar, Typography, Container, Button, IconButton } from '@mui/material';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Badge, { badgeClasses } from '@mui/material/Badge';
+import { styled } from '@mui/material/styles';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCartOutlined';
+
+
+
 import { NavLink } from 'react-router-dom';
 
 const pages = [{ title: "Home", path: '/' },
 { title: "Products", path: '/products' }];
 
-export const Header = () => {
+export const Header = ({cartLenght}) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+
+
+  const CartBadge = styled(Badge)`
+  & .${badgeClasses.badge} {
+    top: -12px;
+    right: -6px;
+  }
+`;
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -26,7 +40,7 @@ export const Header = () => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position='sticky' color='warning'>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
@@ -67,9 +81,14 @@ export const Header = () => {
             component={NavLink}
             to="/cart"
           >
-            <IconButton >
-              <ShoppingCartIcon />
+
+
+            <IconButton>
+              <ShoppingCartIcon fontSize="small" />
+              <CartBadge badgeContent={cartLenght} color="primary" overlap="circular" />
             </IconButton>
+
+
           </Box>
 
 
@@ -80,13 +99,6 @@ export const Header = () => {
 }
 
 
-// const [loading, setLoading] = React.useState(false);
-//     React.useEffect(() => {
-//         const timeout = setTimeout(() => {
-//             setLoading(false);
-//         }, 2000);
-//         return () => clearTimeout(timeout);
-//     });
-//     return (
 
-//     );
+
+
