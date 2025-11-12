@@ -3,15 +3,19 @@ import { AppBar, Tooltip, Box, Toolbar, Typography, Container, Button, IconButto
 import Badge, { badgeClasses } from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCartOutlined';
-import { useEffect } from "react"
+import { useContext } from "react"
 
 
 import { NavLink } from 'react-router-dom';
+import { providerContext } from '../../App/provider/provider';
 
 const pages = [{ title: "Home", path: '/' },
 { title: "Products", path: '/products' }];
 
-export const Header = ({cartLenght}) => {
+export const Header = () => {
+  
+  const {cartLenght} = useContext(providerContext)
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 

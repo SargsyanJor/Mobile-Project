@@ -4,6 +4,8 @@ import { CartItem } from "../../components/CartItem/CartItem"
 
 export const Cart = ({ updateCart }) => {
 
+  
+
   const cart = JSON.parse(localStorage.getItem("cart"))
 
   return (

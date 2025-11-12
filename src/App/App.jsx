@@ -7,6 +7,8 @@ import { Home } from "../pages/Home/Home";
 import { Products } from "../pages/Products/Products";
 import { Cart } from "../pages/Cart/Cart";
 import { Product } from "../pages/Product/Product";
+import { providerContext } from "./provider/provider";
+
 
 
 
@@ -93,16 +95,23 @@ function App() {
   return (
     <>
       {/* <RouterProvider router={router} /> */}
+      <providerContext.Provider value={{
+        cartLenght,
+        products,
+        addToCard,
+      }} >
+        <Routes >
+          <Route path="/" element={<Layout  />} >
+            <Route index element={<Home />} />
+            <Route path="/products" element={<Products />} />
+            <Route path="/products/:id" element={<Product />} />
+            <Route path="/cart" element={<Cart cart={cart} updateCart={updateCart} />} />
+          </Route>
 
-      <Routes >
-        <Route path="/" element={<Layout cartLenght={cartLenght} />} >
-          <Route index element={<Home />} />
-          <Route path="/products" element={<Products products={products} addToCard={addToCard} />} />
-          <Route path="/products/:id" element={<Product />} />
-          <Route path="/cart" element={<Cart cart={cart} updateCart={updateCart} />} />
-        </Route>
+        </Routes>
 
-      </Routes>
+
+      </providerContext.Provider >
 
 
 

@@ -1,10 +1,12 @@
 
+import { useContext } from 'react';
 import { ProductCart } from '../../components/ProductCart/ProductCart';
 import { Box } from '@mui/material';
+import { providerContext } from '../../App/provider/provider';
 
 
-export const Products = ({ products, addToCard, updateCart }) => {
-
+export const Products = () => {
+  const {products,addToCard} = useContext(providerContext)
   return (
     <Box sx={{ display: "flex", flexWrap: "wrap", justifyContent: "center", alignItems: "center", gap: "50px", alignItems: "stretch", padding: "40px", }}>
       {
