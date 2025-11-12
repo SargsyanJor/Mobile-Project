@@ -2,9 +2,9 @@
 import { CartItem } from "../../components/CartItem/CartItem"
 
 
-export const Cart = ({ cart,updateCart }) => {
+export const Cart = ({ updateCart }) => {
 
-
+  const cart = JSON.parse(localStorage.getItem("cart"))
 
   return (
     <div className="cartBox">

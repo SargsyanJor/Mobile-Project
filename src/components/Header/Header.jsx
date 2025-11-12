@@ -3,7 +3,7 @@ import { AppBar, Tooltip, Box, Toolbar, Typography, Container, Button, IconButto
 import Badge, { badgeClasses } from '@mui/material/Badge';
 import { styled } from '@mui/material/styles';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCartOutlined';
-
+import { useEffect } from "react"
 
 
 import { NavLink } from 'react-router-dom';
@@ -16,7 +16,7 @@ export const Header = ({cartLenght}) => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
 
-
+  
   const CartBadge = styled(Badge)`
   & .${badgeClasses.badge} {
     top: -12px;
@@ -97,8 +97,4 @@ export const Header = ({cartLenght}) => {
     </AppBar>
   );
 }
-
-
-
-
 

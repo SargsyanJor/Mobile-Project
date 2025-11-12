@@ -1,12 +1,14 @@
 // import { RouterProvider } from "react-router-dom"
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Layout } from "../components/Layout/Layout";
 import { Home } from "../pages/Home/Home";
 import { Products } from "../pages/Products/Products";
 import { Cart } from "../pages/Cart/Cart";
 import { Product } from "../pages/Product/Product";
+
+
 
 import axios from "axios";
 import "./styles/App.css"
@@ -18,9 +20,21 @@ export const instance = axios.create({
 
 function App() {
 
-
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+
+  const obj = useRef(false)
+
+
+  useEffect(() => {
+    if (obj.current) {
+
+      localStorage.setItem("cart", JSON.stringify(cart))
+    }
+    obj.current = true
+  }, [cart]);
+
+
 
 
   useEffect(() => {
@@ -28,7 +42,7 @@ function App() {
       .then((res) => setProducts(res.data.map((elm) => ({ ...elm, count: 1, initPrice: elm.price }))))
   }, []);
 
- const cartLenght = cart.length
+  const cartLenght = cart.length
 
 
 
@@ -62,16 +76,16 @@ function App() {
 
   }
 
-  const updateCart = (count,id) => {
-    setCart((cart.map((c)=> {
-      if(c.id === id) {
+  const updateCart = (count, id) => {
+    setCart((cart.map((c) => {
+      if (c.id === id) {
         return {
           ...c,
-         count:count,
-         initPrice : count * c.price
-        } 
-        }else {
-          return c
+          count: count,
+          initPrice: count * c.price
+        }
+      } else {
+        return c
       }
     })))
   }
@@ -83,7 +97,7 @@ function App() {
       <Routes >
         <Route path="/" element={<Layout cartLenght={cartLenght} />} >
           <Route index element={<Home />} />
-          <Route path="/products" element={<Products products={products} addToCard={addToCard}  />} />
+          <Route path="/products" element={<Products products={products} addToCard={addToCard} />} />
           <Route path="/products/:id" element={<Product />} />
           <Route path="/cart" element={<Cart cart={cart} updateCart={updateCart} />} />
         </Route>

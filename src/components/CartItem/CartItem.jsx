@@ -22,15 +22,18 @@ export const CartItem = ({ cart, updateCart }) => {
         updateCart(count, cart.id)
     }
 
+
+
+
+
     return (
         <div className="cart-item">
             <div className="cart-left">
                 <img
                     src={cart.image}
-                    alt="Samsung Galaxy Z Flip 5"
                     className="cart-image"
                 />
-                <div className="cart-info" nowrap>
+                <div className="cart-info" >
                     <li className="cart-title">
                         {cart.title}
                     </li>
